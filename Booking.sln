@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Web", "Booking.Web\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Core", "Booking.Core\Booking.Core.csproj", "{039F909F-6995-451F-A0DC-59A39104DD0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Data", "Booking.Data\Booking.Data.csproj", "{2E5BC140-1654-44BB-A1B7-BB37946C7C53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{039F909F-6995-451F-A0DC-59A39104DD0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{039F909F-6995-451F-A0DC-59A39104DD0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{039F909F-6995-451F-A0DC-59A39104DD0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E5BC140-1654-44BB-A1B7-BB37946C7C53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5BC140-1654-44BB-A1B7-BB37946C7C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5BC140-1654-44BB-A1B7-BB37946C7C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5BC140-1654-44BB-A1B7-BB37946C7C53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
