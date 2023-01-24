@@ -6,6 +6,7 @@ namespace Booking.Web.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<GymClass> GymClasses => Set<GymClass>();
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
