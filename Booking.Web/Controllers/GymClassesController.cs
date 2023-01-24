@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Booking.Core.Entities;
 using Booking.Web.Data;
 using Booking.Data.Data;
+using Booking.Web.Models;
+using System.Diagnostics;
 
 namespace Booking.Web.Controllers
 {
@@ -159,6 +161,12 @@ namespace Booking.Web.Controllers
         private bool GymClassExists(int id)
         {
           return (_context.GymClasses?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
