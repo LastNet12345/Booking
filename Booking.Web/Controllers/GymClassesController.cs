@@ -25,9 +25,10 @@ namespace Booking.Web.Controllers
         // GET: GymClasses
         public async Task<IActionResult> Index()
         {
-              return _context.GymClasses != null ? 
-                          View(await _context.GymClasses.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.GymClasses'  is null.");
+           // var model = await _context.GymClasses.IgnoreQueryFilters().ToListAsync();
+            var model = await _context.GymClasses.ToListAsync();
+            
+            return View(model);
         }
 
         // GET: GymClasses/Details/5

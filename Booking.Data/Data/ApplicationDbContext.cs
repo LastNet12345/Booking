@@ -17,6 +17,8 @@ namespace Booking.Data.Data
             base.OnModelCreating(builder);
 
             builder.Entity<ApplicationUserGymClass>().HasKey(a => new { a.ApplicationUserId, a.GymClassId });
+
+            builder.Entity<GymClass>().HasQueryFilter(g => g.StartTime > DateTime.UtcNow);
         }
     }
 }
