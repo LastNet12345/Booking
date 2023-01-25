@@ -115,7 +115,8 @@ namespace Booking.Web.Controllers
 
             if(Request.IsAjax())
             {
-                return StatusCode(StatusCodes.Status400BadRequest);
+                Response.StatusCode = StatusCodes.Status400BadRequest;
+                return PartialView("CreatePartial", gymClass);
             }
 
             return View(gymClass);
