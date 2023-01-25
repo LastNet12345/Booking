@@ -13,6 +13,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Booking.Web.Extensions;
 
 namespace Booking.Web.Controllers
 {
@@ -95,7 +96,7 @@ namespace Booking.Web.Controllers
         // GET: GymClasses/Create
         public IActionResult Create()
         {
-            return View();
+            return Request.IsAjax() ? PartialView("CreatePartial")  : View();
         }
 
         // POST: GymClasses/Create
