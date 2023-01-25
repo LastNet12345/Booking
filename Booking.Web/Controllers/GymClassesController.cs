@@ -112,6 +112,12 @@ namespace Booking.Web.Controllers
                 await _context.SaveChangesAsync();
                 return Request.IsAjax() ? PartialView("GymClassesPartial", await _context.GymClasses.ToListAsync()) : RedirectToAction(nameof(Index));
             }
+
+            if(Request.IsAjax())
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
+            }
+
             return View(gymClass);
         }
 
