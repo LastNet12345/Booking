@@ -3,7 +3,10 @@ using Booking.Data.Data;
 using Booking.Web.Data;
 using Booking.Web.Extensions;
 using Booking.Web.MiddleWare;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 
 namespace Booking.Web
@@ -39,8 +42,26 @@ namespace Booking.Web
 
             builder.Services.AddControllersWithViews(options =>
             {
+               // options.Filters.Add<AuthorizeFilter>();
+
+                var policy = new AuthorizationPolicyBuilder()
+                                    .RequireAuthenticatedUser()
+                                    .RequireRole("Member")
+                                    .Build();
+
+                options.Filters.Add(new AuthorizeFilter(policy));
+
                 options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(_ => "The field is required");
             });
+
+            //builder.Services.AddAuthorization(opt =>
+            //{
+            //    opt.AddPolicy("Test", policy =>
+            //    {
+            //        policy.RequireRole("Admin");
+            //        policy.RequireClaim("Test");
+            //    });
+            //});
 
             var app = builder.Build();
 
