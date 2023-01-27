@@ -5,6 +5,7 @@
 
 
 let createForm = document.querySelector('#createajax');
+document.querySelector('#fetch').addEventListener('click', fetchCreateForm);
 
 
 function removeForm() {
@@ -20,4 +21,19 @@ function fail(response) {
 function fixValidation() {
     const form = createForm.querySelector('form');
     $.validator.unobtrusive.parse(form);
+}
+
+function fetchCreateForm() {
+    fetch('https://localhost:7108/GymClasses/FetchForm', {
+        method: 'GET',
+        headers: {
+
+        }
+    })
+        .then(res => res.text())
+        .then(data => {
+            createForm.innerHTML = data;
+            fixValidation();
+        })
+        .catch(err => console.log(err));
 }
