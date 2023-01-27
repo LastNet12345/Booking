@@ -1,6 +1,7 @@
 using Booking.Core.Entities;
 using Booking.Data.Data;
 using Booking.Web.Data;
+using Booking.Web.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,7 @@ namespace Booking.Web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
 
 
@@ -32,6 +33,7 @@ namespace Booking.Web
                 options.Password.RequiredLength = 3;
             
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddControllersWithViews(options =>
@@ -40,6 +42,8 @@ namespace Booking.Web
             });
 
             var app = builder.Build();
+
+            await app.SeedDataAsync();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
