@@ -2,6 +2,7 @@ using Booking.Core.Entities;
 using Booking.Data.Data;
 using Booking.Web.Data;
 using Booking.Web.Extensions;
+using Booking.Web.MiddleWare;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -61,6 +62,8 @@ namespace Booking.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            //app.UseMiddlewareTest();
 
             app.UseAuthorization();
 
