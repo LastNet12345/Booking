@@ -1,5 +1,6 @@
 using Booking.Core.Entities;
 using Booking.Data.Data;
+using Booking.Data.Repositories;
 using Booking.Web.Data;
 using Booking.Web.Extensions;
 using Booking.Web.MiddleWare;
@@ -26,6 +27,8 @@ namespace Booking.Web
                 options.UseSqlServer(connectionString));
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => 
             {

@@ -15,6 +15,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Booking.Web.Extensions;
 using Booking.Web.Filters;
+using Booking.Data.Repositories;
 
 namespace Booking.Web.Controllers
 {
@@ -22,22 +23,30 @@ namespace Booking.Web.Controllers
     public class GymClassesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork uow;
+
+        // private readonly GymClassRepository gymClassRepository;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public GymClassesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public GymClassesController(IUnitOfWork uow,ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            // gymClassRepository = new GymClassRepository(context);
+            this.uow = uow;
+
             this.userManager = userManager;
         }
 
         // GET: GymClasses
         public async Task<IActionResult> Index()
         {
-           // var model = await _context.GymClasses.IgnoreQueryFilters().ToListAsync();
-            var model = await _context.GymClasses.ToListAsync();
-            
+            List<GymClass> model = await uow.GymClassRepository.GetAsync();
+
             return View(model);
         }
+
+       
 
         //[Authorize]
         public async Task<IActionResult> BookingToggle(int? id)
@@ -48,15 +57,9 @@ namespace Booking.Web.Controllers
             var userId = userManager.GetUserId(User);
 
             if (userId == null) return NotFound();
+            ApplicationUserGymClass? attending = await FindAsync(id, userId);
 
-            //var currentGymClass = await _context.GymClasses.Include(g => g.AttendingMembers)
-            //                                               .FirstOrDefaultAsync(g => g.Id == id);
-
-            //var attending = currentGymClass?.AttendingMembers.FirstOrDefault(a => a.ApplicationUserId == userId);
-
-            var attending = await _context.AppUserGymClass.FindAsync(userId, id);
-
-            if(attending == null)
+            if (attending == null)
             {
                 var booking = new ApplicationUserGymClass
                 {
@@ -74,7 +77,18 @@ namespace Booking.Web.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
-           
+
+        }
+
+        private async Task<ApplicationUserGymClass> FindAsync(int? id, string? userId)
+        {
+
+            //var currentGymClass = await _context.GymClasses.Include(g => g.AttendingMembers)
+            //                                               .FirstOrDefaultAsync(g => g.Id == id);
+
+            //var attending = currentGymClass?.AttendingMembers.FirstOrDefault(a => a.ApplicationUserId == userId);
+
+            return await _context.AppUserGymClass.FindAsync(userId, id);
         }
 
         // GET: GymClasses/Details/5
