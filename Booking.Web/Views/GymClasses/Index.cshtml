@@ -9,20 +9,22 @@
 
 <div id="createajax"></div>
 
-<p>
-    <a asp-action="Create">Create New original</a>
+@if (User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-action="Create">Create New original</a>
 
-    <a asp-action="Create" class="btn btn-dark"
+        <a asp-action="Create" class="btn btn-dark"
        data-ajax="true"
        data-ajax-method="GET"
        data-ajax-update="#createajax"
        data-ajax-mode="replace"
-       data-ajax-success="fixValidation"
-    >Create New Jquery ajax</a>
+       data-ajax-success="fixValidation">Create New Jquery ajax</a>
 
-    <p id="fetch" class="btn btn-dark">Fetch</p>
-    <p id="fetch2" class="btn btn-dark">Fetch2</p>
-</p>
+        <p id="fetch" class="btn btn-dark">Fetch</p>
+        <p id="fetch2" class="btn btn-dark">Fetch2</p>
+    </div>
+}
 <table class="table">
     <thead>
         <tr>
