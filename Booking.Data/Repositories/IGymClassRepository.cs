@@ -6,7 +6,7 @@ namespace Booking.Data.Repositories
     {
         Task<List<GymClass>> GetAsync();
         Task<IEnumerable<GymClass>> GetWithAttendinAsync();
-        Task<GymClass?> GetAsync(int? id);
+        Task<GymClass?> GetAsync(int id);
         void Add(GymClass gymclass);
       
     }

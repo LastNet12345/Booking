@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Booking.Web.Extensions;
 using Booking.Web.Filters;
 using Booking.Data.Repositories;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Booking.Web.Controllers
 {
@@ -58,7 +59,7 @@ namespace Booking.Web.Controllers
             var userId = userManager.GetUserId(User);
 
             if (userId == null) return NotFound();
-            ApplicationUserGymClass? attending = await FindAsync(id, userId);
+            ApplicationUserGymClass? attending = await uow.ApplicationUserGymClassRepository.FindAsync(userId, (int)id);
 
             if (attending == null)
             {
@@ -68,36 +69,27 @@ namespace Booking.Web.Controllers
                     GymClassId = (int)id
                 };
 
-                _context.AppUserGymClass.Add(booking);
+               // _context.AppUserGymClass.Add(booking);
+               uow.ApplicationUserGymClassRepository.Add(booking);
             }
             else
             {
-                _context.AppUserGymClass.Remove(attending);
+               // _context.AppUserGymClass.Remove(attending);
+               uow.ApplicationUserGymClassRepository.Remove(attending);
             }
 
-            await _context.SaveChangesAsync();
+            await uow.CompleteAsync();
 
             return RedirectToAction("Index");
 
         }
 
-        private async Task<ApplicationUserGymClass> FindAsync(int? id, string? userId)
-        {
-
-            //var currentGymClass = await _context.GymClasses.Include(g => g.AttendingMembers)
-            //                                               .FirstOrDefaultAsync(g => g.Id == id);
-
-            //var attending = currentGymClass?.AttendingMembers.FirstOrDefault(a => a.ApplicationUserId == userId);
-
-            return await _context.AppUserGymClass.FindAsync(userId, id);
-        }
 
         // GET: GymClasses/Details/5
         [RequiredParameterRequiredModel("id")]
         public async Task<IActionResult> Details(int? id)
         {
-            return View(await _context.GymClasses
-                .FirstOrDefaultAsync(m => m.Id == id));
+            return View(await uow.GymClassRepository.GetAsync((int)id!));
         }
 
         // GET: GymClasses/Create
