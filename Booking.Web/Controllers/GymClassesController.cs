@@ -17,6 +17,7 @@ using Booking.Web.Extensions;
 using Booking.Web.Filters;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Booking.Core.Repositories;
+using Booking.Core.ViewModels;
 
 namespace Booking.Web.Controllers
 {
@@ -36,7 +37,19 @@ namespace Booking.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            List<GymClass> model = await uow.GymClassRepository.GetAsync();
+            // List<GymClass> model = await uow.GymClassRepository.GetAsync();
+
+            var userId = userManager.GetUserId(User);
+
+            var model = (await uow.GymClassRepository.GetWithAttendinAsync())
+                                                     .Select(g => new GymClassesViewModel
+                                                     {
+                                                         Id = g.Id,
+                                                         Name = g.Name,
+                                                         Duration= g.Duration,
+                                                         StartTime= g.StartTime,
+                                                         Attending = g.AttendingMembers.Any(a => a.ApplicationUserId == userId)
+                                                     }).ToList();
 
             return View(model);
         }
