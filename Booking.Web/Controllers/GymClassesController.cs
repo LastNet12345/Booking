@@ -40,21 +40,25 @@ namespace Booking.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            // List<GymClass> model = await uow.GymClassRepository.GetAsync();
-
+            //var gymClasses = await uow.GymClassRepository.GetAsync();
+            //var res = mapper.Map<IEnumerable<GymClassesViewModel>>(gymClasses);
+            
             var userId = userManager.GetUserId(User);
+            var gymClasses = await uow.GymClassRepository.GetWithAttendinAsync();
+            var res = mapper.Map<IEnumerable<GymClassesViewModel>>(gymClasses, opt => opt.Items.Add("UserId", userId));
 
-            var model = (await uow.GymClassRepository.GetWithAttendinAsync())
-                                                     .Select(g => new GymClassesViewModel
-                                                     {
-                                                         Id = g.Id,
-                                                         Name = g.Name,
-                                                         Duration= g.Duration,
-                                                         StartTime= g.StartTime,
-                                                         Attending = g.AttendingMembers.Any(a => a.ApplicationUserId == userId)
-                                                     }).ToList();
 
-            return View(model);
+            //var model = (await uow.GymClassRepository.GetWithAttendinAsync())
+            //                    .Select(g => new GymClassesViewModel
+            //                    {
+            //                        Id = g.Id,
+            //                        Name = g.Name,
+            //                        Duration= g.Duration,
+            //                        StartTime= g.StartTime,
+            //                        Attending = g.AttendingMembers.Any(a => a.ApplicationUserId == userId)
+            //                    }).ToList();
+
+            return View(res);
         }
 
        
