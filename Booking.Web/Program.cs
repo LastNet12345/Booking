@@ -49,7 +49,7 @@ namespace Booking.Web
 
                 var policy = new AuthorizationPolicyBuilder()
                                     .RequireAuthenticatedUser()
-                                    .RequireRole("Member")
+                                  //.RequireRole("Member")
                                     .Build();
 
                 options.Filters.Add(new AuthorizeFilter(policy));

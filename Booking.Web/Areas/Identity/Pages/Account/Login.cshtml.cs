@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Booking.Web.Areas.Identity.Pages.Account
 {
+    [AllowAnonymous]
     public class LoginModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
