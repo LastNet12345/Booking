@@ -15,6 +15,5 @@ namespace Booking.Core.ViewModels
         public TimeSpan? Duration { get; set; }
         public bool Attending { get; set; }
 
-
     }
 }

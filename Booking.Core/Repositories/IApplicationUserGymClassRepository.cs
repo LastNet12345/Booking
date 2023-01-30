@@ -1,6 +1,6 @@
 ﻿using Booking.Core.Entities;
 
-namespace Booking.Data.Repositories
+namespace Booking.Core.Repositories
 {
     public interface IApplicationUserGymClassRepository
     {

@@ -15,12 +15,12 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Booking.Web.Extensions;
 using Booking.Web.Filters;
-using Booking.Data.Repositories;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Booking.Core.Repositories;
 
 namespace Booking.Web.Controllers
 {
-   // [Authorize(Policy ="Test")]
+    // [Authorize(Policy ="Test")]
     public class GymClassesController : Controller
     {
         private readonly IUnitOfWork uow;

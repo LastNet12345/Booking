@@ -1,6 +1,6 @@
 ﻿using Booking.Core.Entities;
 
-namespace Booking.Data.Repositories
+namespace Booking.Core.Repositories
 {
     public interface IGymClassRepository
     {
@@ -8,6 +8,6 @@ namespace Booking.Data.Repositories
         Task<IEnumerable<GymClass>> GetWithAttendinAsync();
         Task<GymClass?> GetAsync(int id);
         void Add(GymClass gymclass);
-      
+
     }
 }
