@@ -18,6 +18,7 @@ using Booking.Web.Filters;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Booking.Core.Repositories;
 using Booking.Core.ViewModels;
+using AutoMapper;
 
 namespace Booking.Web.Controllers
 {
@@ -26,11 +27,13 @@ namespace Booking.Web.Controllers
     {
         private readonly IUnitOfWork uow;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IMapper mapper;
 
-        public GymClassesController(IUnitOfWork uow, UserManager<ApplicationUser> userManager)
+        public GymClassesController(IUnitOfWork uow, UserManager<ApplicationUser> userManager, IMapper mapper)
         {
             this.uow = uow;
             this.userManager = userManager;
+            this.mapper = mapper;
         }
 
         // GET: GymClasses
