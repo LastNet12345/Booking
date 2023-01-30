@@ -42,11 +42,13 @@ namespace Booking.Web.Controllers
         {
             //var gymClasses = await uow.GymClassRepository.GetAsync();
             //var res = mapper.Map<IEnumerable<GymClassesViewModel>>(gymClasses);
-            
-            var userId = userManager.GetUserId(User);
-            var gymClasses = await uow.GymClassRepository.GetWithAttendinAsync();
-            var res = mapper.Map<IEnumerable<GymClassesViewModel>>(gymClasses, opt => opt.Items.Add("UserId", userId));
 
+            //var userId = userManager.GetUserId(User);
+            //var gymClasses = await uow.GymClassRepository.GetWithAttendinAsync();
+            //var res = mapper.Map<IEnumerable<GymClassesViewModel>>(gymClasses, opt => opt.Items.Add("UserId", userId)); //var gymClasses = await uow.GymClassRepository.GetWithAttendinAsync();
+
+            var gymClasses = await uow.GymClassRepository.GetWithAttendinAsync();
+            var res = mapper.Map<IEnumerable<GymClassesViewModel>>(gymClasses);
 
             //var model = (await uow.GymClassRepository.GetWithAttendinAsync())
             //                    .Select(g => new GymClassesViewModel
