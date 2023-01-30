@@ -23,19 +23,12 @@ namespace Booking.Web.Controllers
    // [Authorize(Policy ="Test")]
     public class GymClassesController : Controller
     {
-       // private readonly ApplicationDbContext _context;
         private readonly IUnitOfWork uow;
-
-        // private readonly GymClassRepository gymClassRepository;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public GymClassesController(IUnitOfWork uow,/*ApplicationDbContext context,*/ UserManager<ApplicationUser> userManager)
+        public GymClassesController(IUnitOfWork uow, UserManager<ApplicationUser> userManager)
         {
-
-           // _context = context ?? throw new ArgumentNullException(nameof(context));
-            // gymClassRepository = new GymClassRepository(context);
             this.uow = uow;
-
             this.userManager = userManager;
         }
 
@@ -49,7 +42,6 @@ namespace Booking.Web.Controllers
         }
 
        
-
         //[Authorize]
         public async Task<IActionResult> BookingToggle(int? id)
         {
@@ -69,12 +61,10 @@ namespace Booking.Web.Controllers
                     GymClassId = (int)id
                 };
 
-               // _context.AppUserGymClass.Add(booking);
                uow.ApplicationUserGymClassRepository.Add(booking);
             }
             else
             {
-               // _context.AppUserGymClass.Remove(attending);
                uow.ApplicationUserGymClassRepository.Remove(attending);
             }
 
@@ -112,7 +102,6 @@ namespace Booking.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // _context.Add(gymClass);
                 uow.GymClassRepository.Add(gymClass);
                 await uow.CompleteAsync();
                 return Request.IsAjax() ? PartialView("GymClassPartial", gymClass) : RedirectToAction(nameof(Index));
