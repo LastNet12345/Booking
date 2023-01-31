@@ -8,6 +8,6 @@ namespace Booking.Core.Repositories
         Task<IEnumerable<GymClass>> GetWithAttendinAsync();
         Task<GymClass?> GetAsync(int id);
         void Add(GymClass gymclass);
-
+        Task<IEnumerable<GymClass>> GetHistoryAsync();
     }
 }

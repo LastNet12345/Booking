@@ -25,6 +25,20 @@
         <p id="fetch2" class="btn btn-dark">Fetch2</p>
     </div>
 }
+
+@if (User.IsInRole("Member"))
+{
+    <form asp-action="Index">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" asp-for="ShowHistory" id="checkbox">
+            <label class="form-check-label" for="checkbox">
+                Show History
+            </label>
+        </div>
+    </form>
+}
+
+
 <table class="table">
     <thead>
         <tr>
