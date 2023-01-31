@@ -49,4 +49,51 @@ namespace Booking.Data.Repositories
                         .ToListAsync();
         }
     }
+
+
+    public class MockRepo : IGymClassRepository
+    {
+        private ApplicationDbContext db;
+
+        public MockRepo(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
+        public void Add(GymClass gymclass)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<GymClass>> GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<GymClass?> GetAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<GymClass>> GetHistoryAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<GymClass>> GetWithAttendinAsync()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class MockUoW : IUnitOfWork
+    {
+        public IGymClassRepository GymClassRepository { get; }
+        public IApplicationUserGymClassRepository ApplicationUserGymClassRepository { get; }
+
+        public Task CompleteAsync()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
