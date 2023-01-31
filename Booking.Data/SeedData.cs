@@ -62,7 +62,9 @@ namespace Booking.Data
             var admin = new ApplicationUser
             {
                 UserName = adminEmail,
-                Email = adminEmail
+                Email = adminEmail,
+                FirstName = "Admin",
+                TimeOfRegistration = DateTime.Now
             };
 
             var result = await userManager.CreateAsync(admin, adminPW);
