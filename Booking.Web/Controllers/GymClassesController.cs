@@ -139,7 +139,7 @@ namespace Booking.Web.Controllers
         {
             uow.GymClassRepository.Add(gymClass);
             await uow.CompleteAsync();
-            return Request.IsAjax() ? PartialView("GymClassPartial", gymClass) : RedirectToAction(nameof(Index));
+            return Request.IsAjax() ? PartialView("GymClassPartial", mapper.Map<GymClassesViewModel>(gymClass)) : RedirectToAction(nameof(Index));
         }
 
         if (Request.IsAjax())

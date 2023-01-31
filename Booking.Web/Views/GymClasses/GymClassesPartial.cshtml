@@ -2,7 +2,9 @@
 
 @foreach (var item in Model)
 {
-    <tr>
+
+    <partial name="GymClassPartial" model="@item"></partial>
+    @*<tr>
         <td>
             @if (User.IsInRole("Member"))
             {
@@ -34,6 +36,6 @@
             @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>|
 
         }*@
-        </td>
-    </tr>
+    @*    </td>
+    </tr>*@
 }
