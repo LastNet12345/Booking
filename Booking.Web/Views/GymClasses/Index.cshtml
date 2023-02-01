@@ -58,3 +58,11 @@
         <partial name="GymClassesPartial" model="@Model.GymClasses" />
     </tbody>
 </table>
+
+@if (User.IsInRole("Admin"))
+{
+    @section Scripts {
+    @{await Html.RenderPartialAsync("RenderFetchPartial");}
+}
+
+}

@@ -5,8 +5,8 @@
 
 
 let createForm = document.querySelector('#createajax');
-document.querySelector('#fetch').addEventListener('click', fetchCreateForm);
-document.querySelector('#fetch2').addEventListener('click', fetchCreateForm2);
+//document.querySelector('#fetch').addEventListener('click', fetchCreateForm);
+//document.querySelector('#fetch2').addEventListener('click', fetchCreateForm2);
 
 
 function removeForm() {
@@ -24,28 +24,28 @@ function fixValidation() {
     $.validator.unobtrusive.parse(form);
 }
 
-function fetchCreateForm() {
-    fetch('https://localhost:44301/GymClasses/FetchForm', {
-        method: 'GET',
-        headers: {
+//function fetchCreateForm() {
+//    fetch('https://localhost:44301/GymClasses/FetchForm', {
+//        method: 'GET',
+//        headers: {
 
-        }
-    })
-        .then(res => res.text())
-        .then(data => {
-            createForm.innerHTML = data;
-            fixValidation();
-        })
-        .catch(err => console.log(err));
-}
+//        }
+//    })
+//        .then(res => res.text())
+//        .then(data => {
+//            createForm.innerHTML = data;
+//            fixValidation();
+//        })
+//        .catch(err => console.log(err));
+//}
 
-async function fetchCreateForm2() {
-    const res = await fetch('https://localhost:44301/GymClasses/FetchForm', { method: 'GET' });
-    //Check res! res.ok
-    const data = await res.text();
-    createForm.innerHTML = data;
-    fixValidation();
-}
+//async function fetchCreateForm2() {
+//    const res = await fetch('https://localhost:44301/GymClasses/FetchForm', { method: 'GET' });
+//    //Check res! res.ok
+//    const data = await res.text();
+//    createForm.innerHTML = data;
+//    fixValidation();
+//}
 
 $('#checkbox').click(function () {
     $('form').submit();
