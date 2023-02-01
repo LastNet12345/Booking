@@ -50,6 +50,14 @@ namespace Booking.Web.Controllers
             var res = mapper.Map<IndexViewModel>(gymClasses);
 
             return View(res);
+        }  
+        
+       
+        public async Task<IActionResult> Index2()
+        {
+            var model = await userManager.GetUserAsync(User);
+
+            return View(model);
         }
 
 
