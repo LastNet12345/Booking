@@ -30,7 +30,7 @@ namespace Booking.Tests.ControllerTests
             }));
 
             var mockUserStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new UserManager<ApplicationUser>(mockUserStore.Object, null, null, null, null, null, null, null, null);
+            var userManager = new UserManager<ApplicationUser>(mockUserStore.Object, null!, null!, null!, null!, null!, null!, null!, null!);
 
             controller = new GymClassesController(mockUoW.Object, userManager, mapper);
         }
