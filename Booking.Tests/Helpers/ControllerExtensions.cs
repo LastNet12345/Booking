@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
@@ -18,6 +19,18 @@ namespace Booking.Tests.Helpers
 
             controller.ControllerContext = new ControllerContext { HttpContext= mockHttpContext.Object };
 
+        }
+        
+        public static void SetAjaxRequest(this Controller controller, bool isAjax)
+        {
+            var mockHttpContext = new Mock<HttpContext>();
+
+            if(isAjax)
+                  mockHttpContext.SetupGet(c => c.Request.Headers["X-Requested-With"]).Returns("XMLHttpRequest");
+            else
+                  mockHttpContext.SetupGet(c => c.Request.Headers["X-Requested-With"]).Returns("");
+
+            controller.ControllerContext = new ControllerContext { HttpContext= mockHttpContext.Object };
         }
     }
 }
