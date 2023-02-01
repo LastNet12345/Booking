@@ -1,9 +1,11 @@
 ﻿@model IEnumerable<GymClassesViewModel>
 
-@foreach (var item in Model)
-{
+    @Html.DisplayFor(g => g)
 
-    <partial name="GymClassPartial" model="@item"></partial>
+@*@foreach (var item in Model)
+{*@
+
+   @* <partial name="GymClassPartial" model="@item"></partial>*@
     @*<tr>
         <td>
             @if (User.IsInRole("Member"))
@@ -38,4 +40,4 @@
         }*@
     @*    </td>
     </tr>*@
-}
+@*}*@
