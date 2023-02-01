@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Booking.Data\Booking.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\GymClasses\DisplayTemplates\" />
+  </ItemGroup>
+
 </Project>
