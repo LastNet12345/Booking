@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 
 namespace Booking.Web.Areas.Identity.Pages.Account
 {
@@ -128,6 +129,7 @@ namespace Booking.Web.Areas.Identity.Pages.Account
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var addToRoleResult = await _userManager.AddToRoleAsync(user, "Member");
+                var addClaimResult = await _userManager.AddClaimAsync(user, new Claim("FirstName", user.FirstName));
 
                 if (result.Succeeded && addToRoleResult.Succeeded)
                 {
